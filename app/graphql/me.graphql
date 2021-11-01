@@ -1,0 +1,32 @@
+query Me {
+  me {
+    id
+    isSelf
+    username
+    email
+    avatar
+    bio
+    following {
+      id
+      avatar
+      bio
+      username
+    }
+    followers {
+      id
+      avatar
+      bio
+      username
+    }
+    posts {
+      id
+      body
+    }
+    postsCount
+    followingCount
+    followersCount
+    comments {
+      id
+    }
+  }
+}

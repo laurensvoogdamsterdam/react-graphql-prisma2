@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Profile {
+  id     Int  @id @default(autoincrement())
+  user   User @relation("UserHasProfile", fields: [userId], references: [id])
+  userId Int
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  username     String     @unique
+  email        String     @unique
+  password     String
+  avatar       String     @default("images/avatar.jpeg")
+  firstName    String     @default("")
+  lastName     String     @default("")
+  bio          String     @default("")
+  comments     Comment[]
+  likes        Like[]
+  messagesFrom Message[]  @relation("MessageFrom")
+  messagesTo   Message[]  @relation("MessageTo")
+  followers    User[]     @relation("UserFollows")
+  following    User[]     @relation("UserFollows")
+  posts        Post[]
+  rooms        Room[]
+  loginSecret  String     @default("")
+  Profile      Profile[]  @relation("UserHasProfile")
+  Location     Location[] @relation("UserLocation")
+  Views        View[]
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  body      String
+  title     String    @default("")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  location  String    @default("")
+  caption   String    @default("")
+  comments  Comment[]
+  files     File[]
+  likes     Like[]
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    Int?
+  views     View[]
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  postId    Int?
+  post      Post?    @relation(fields: [postId], references: [id])
+  comment   Comment? @relation(fields: [commentId], references: [id])
+  commentId Int?
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+}
+
+model View {
+  id     Int   @id @default(autoincrement())
+  postId Int?
+  post   Post? @relation(fields: [postId], references: [id])
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int?
+  postId    Int?
+  post      Post?    @relation(fields: [postId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
+  likes     Like[]
+}
+
+model File {
+  id     Int    @id @default(autoincrement())
+  url    String
+  postId Int?
+  post   Post?  @relation(fields: [postId], references: [id])
+}
+
+model Room {
+  id           Int       @id @default(autoincrement())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  messages     Message[]
+  participants User[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  text      String?
+  fromId    Int
+  toId      Int
+  roomId    Int?
+  from      User     @relation("MessageFrom", fields: [fromId], references: [id])
+  room      Room?    @relation(fields: [roomId], references: [id])
+  to        User     @relation("MessageTo", fields: [toId], references: [id])
+}
+
+model Location {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(name: "UserLocation", fields: [userId], references: [id])
+  latitude  Float
+  longitude Float
+  userId    Int
+}

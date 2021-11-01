@@ -1,0 +1,10 @@
+mutation SigninUser($email: String!, $password: String!) {
+  signinUser(email: $email, password: $password) {
+    id
+    username
+    email
+    avatar
+    bio
+    token
+  }
+}

@@ -1,0 +1,17 @@
+mutation Upload(
+  $body: String!
+  $caption: String
+  $location: String
+  $files: [Upload!]
+) {
+  upload(body: $body, caption: $caption, location: $location, files: $files) {
+    id
+    body
+    caption
+    location
+    files {
+      id
+      url
+    }
+  }
+}

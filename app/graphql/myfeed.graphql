@@ -1,0 +1,27 @@
+query SeeFeed {
+  seeFeed {
+    id
+    body
+    viewCount
+    isLiked
+    commentCount
+    likeCount
+    files {
+      url
+    }
+    user {
+      id
+      avatar
+      email
+      username
+    }
+    comments {
+      id
+      text
+      user {
+        id
+        avatar
+      }
+    }
+  }
+}
