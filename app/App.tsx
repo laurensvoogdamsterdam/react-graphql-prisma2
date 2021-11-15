@@ -25,11 +25,14 @@ import reducer from "./store/reducer";
 import { AuthContext } from "./contexts";
 import { createUploadLink } from "apollo-upload-client";
 
-
+/**
+ * This is the endpoint of the backend database server
+ */
 const httpLink = createUploadLink({
   uri: `${URL}`,
 });
 
+/** */
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   try {
