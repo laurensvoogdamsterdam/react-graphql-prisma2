@@ -76,7 +76,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd app && yarn global add expo-cli && yarn && expo build:android                    
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
@@ -86,6 +85,7 @@ jobs:
           java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
           architecture: x64 # (x64 or x86) - defaults to x64
       - uses: expo/expo-github-action@v5
+      - run: cd app && yarn global add expo-cli && yarn && expo build:android                            
         with:
           expo-version: 3.x
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
@@ -96,7 +96,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd app && yarn global add expo-cli && yarn && expo build:ios                    
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
@@ -106,7 +105,8 @@ jobs:
           java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
           architecture: x64 # (x64 or x86) - defaults to x64
       - uses: expo/expo-github-action@v5
-        with:
+      - run: cd app && yarn global add expo-cli && yarn && expo build:ios                            
+        with:          
           expo-version: 3.x
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
