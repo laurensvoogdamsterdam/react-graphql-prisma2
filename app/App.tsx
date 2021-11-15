@@ -69,7 +69,7 @@ const ApolloApp = () => {
       await getAccessToken()
         .then((token) => {
           if (token) {
-            dispatch({ type: ActionType.SET_TOKEN, payload: token });
+            dispatch({ type: ActionType.SET_TOKEN, token: token });
           }
         })
         .catch((e) => null);

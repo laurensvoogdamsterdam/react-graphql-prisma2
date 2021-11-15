@@ -28,7 +28,12 @@ export interface LoadingAction {
   token: boolean;
 }
 
-export type AppActions = LoginAction | LogoutAction | LoadingAction;
+export interface SetTokenAction {
+  type: ActionType.SET_TOKEN;
+  token: string | (() => string) | undefined;
+}
+
+export type AppActions = LoginAction | LogoutAction | LoadingAction | SetTokenAction;
 
 interface AppState {
   data: null;

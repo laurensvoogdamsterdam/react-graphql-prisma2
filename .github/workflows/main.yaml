@@ -11,9 +11,26 @@ jobs:
   test_server: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
+      - name: "Unit test"
       - uses: actions/checkout@v2
       - run: |
-          cd app # todo : map to server, not app
+          cd app # todo 
+          yarn
+      - run: |
+          cd app
+          yarn jest --testRunner              
+      - name: "Integration test"
+      - uses: actions/checkout@v2
+      - run: |
+          cd app # todo 
+          yarn
+      - run: |
+          cd app
+          yarn jest --testRunner
+      - name: "Smoke test"
+      - uses: actions/checkout@v2
+      - run: |
+          cd app # todo 
           yarn
       - run: |
           cd app
@@ -23,9 +40,26 @@ jobs:
     needs: [test_server]
     runs-on: ubuntu-latest
     steps:
+      - name: "Unit test"
       - uses: actions/checkout@v2
       - run: |
+          cd app # todo 
+          yarn
+      - run: |
           cd app
+          yarn jest --testRunner              
+      - name: "Integration test"
+      - uses: actions/checkout@v2
+      - run: |
+          cd app # todo 
+          yarn
+      - run: |
+          cd app
+          yarn jest --testRunner
+      - name: "Smoke test"
+      - uses: actions/checkout@v2
+      - run: |
+          cd app # todo 
           yarn
       - run: |
           cd app
@@ -35,6 +69,23 @@ jobs:
     needs: [test_server]
     runs-on: ubuntu-latest
     steps:
+      - name: "Unit test"
+      - uses: actions/checkout@v2
+      - run: |
+          cd app # todo 
+          yarn
+      - run: |
+          cd app
+          yarn jest --testRunner              
+      - name: "Integration test"
+      - uses: actions/checkout@v2
+      - run: |
+          cd app # todo 
+          yarn
+      - run: |
+          cd app
+          yarn jest --testRunner
+      - name: "Smoke test"
       - uses: actions/checkout@v2
       - run: |
           cd app # todo 
@@ -47,6 +98,7 @@ jobs:
     needs: [test_web]
     runs-on: ubuntu-latest
     steps:
+      - name: "Deploy to firebase at https://laurensvoogd-dev.web.app"
       - uses: actions/checkout@v2
       - run: |        
           cd web && yarn && yarn build

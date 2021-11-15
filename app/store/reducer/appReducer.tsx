@@ -68,8 +68,8 @@ export const appReducer = (state = initialState, action) => {
       setAccessToken(action.payload.token);
       return {
         ...state,
-        ...action.payload,
-        accessToken: action.payload,
+        ...action.token,
+        accessToken: action.token,
       };
     }
     case ActionType.SIGNUP: {
