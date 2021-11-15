@@ -20,7 +20,6 @@ jobs:
           cd app
           yarn jest --testRunner              
       - name: "Integration test"
-      - uses: actions/checkout@v2
       - run: |
           cd app # todo 
           yarn
@@ -28,7 +27,6 @@ jobs:
           cd app
           yarn jest --testRunner
       - name: "Smoke test"
-      - uses: actions/checkout@v2
       - run: |
           cd app # todo 
           yarn
@@ -39,7 +37,7 @@ jobs:
     if: ${{ always() }}
     needs: [test_server]
     runs-on: ubuntu-latest
-    steps:
+    steps:      
       - name: "Unit test"
       - uses: actions/checkout@v2
       - run: |
@@ -49,7 +47,6 @@ jobs:
           cd app
           yarn jest --testRunner              
       - name: "Integration test"
-      - uses: actions/checkout@v2
       - run: |
           cd app # todo 
           yarn
@@ -57,7 +54,6 @@ jobs:
           cd app
           yarn jest --testRunner
       - name: "Smoke test"
-      - uses: actions/checkout@v2
       - run: |
           cd app # todo 
           yarn
@@ -78,7 +74,6 @@ jobs:
           cd app
           yarn jest --testRunner              
       - name: "Integration test"
-      - uses: actions/checkout@v2
       - run: |
           cd app # todo 
           yarn
@@ -86,7 +81,6 @@ jobs:
           cd app
           yarn jest --testRunner
       - name: "Smoke test"
-      - uses: actions/checkout@v2
       - run: |
           cd app # todo 
           yarn
