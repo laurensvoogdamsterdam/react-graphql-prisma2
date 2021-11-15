@@ -1,4 +1,4 @@
-name: 'build-test'
+name: 'build-test-deploy'
 on: # rebuild any PRs and main branch changes
   pull_request:
   push:
@@ -6,8 +6,6 @@ on: # rebuild any PRs and main branch changes
       - master
       - 'releases/*'
 
-  
-  
 
 jobs:
   test_server: # make sure build/ci work properly
@@ -32,7 +30,7 @@ jobs:
       - run: |
           cd app
           yarn jest --testRunner
-  test_weg:
+  test_web:
     if: ${{ always() }}
     needs: [test_server]
     runs-on: ubuntu-latest
