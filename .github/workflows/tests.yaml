@@ -1,0 +1,47 @@
+name: 'build-test'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - master
+      - 'releases/*'
+
+  
+  
+
+jobs:
+  test_server: # make sure build/ci work properly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          cd app # todo : map to server, not app
+          yarn
+      - run: |
+          cd app
+          yarn jest --testRunner
+  test_app:
+    if: ${{ always() }}
+    needs: [test_server]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          cd app
+          yarn
+      - run: |
+          cd app
+          yarn jest --testRunner
+  test_weg:
+    if: ${{ always() }}
+    needs: [test_server]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          cd app # todo 
+          yarn
+      - run: |
+          cd app
+          yarn jest --testRunner
+  
