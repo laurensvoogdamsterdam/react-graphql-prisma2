@@ -1,9 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import { PubSub } from "graphql-yoga";
 
+/** Database instance */
 const prisma = new PrismaClient();
 
+/** PubSub for pagination and realtime fetching */
 const pubsub = new PubSub();
+/** */
 export interface Context {
   prisma: PrismaClient;
   request: any; // HTTP request carrying the `Authorization` header
