@@ -47,7 +47,6 @@ jobs:
     needs: [Test_web]
     runs-on: ubuntu-latest
     steps:
-      - name: "Deploy to firebase at https://laurensvoogd-dev.web.app"
       - uses: actions/checkout@v2
       - run: |        
           cd web && yarn && yarn build
