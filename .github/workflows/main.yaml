@@ -62,7 +62,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd app && yarn add -g expo-cli && yarn && expo build:android                    
+      - run: cd app && yarn global add expo-cli && yarn && expo build:android                    
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
@@ -82,7 +82,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd app && yarn add -g expo-cli && yarn && expo build:ios                    
+      - run: cd app && yarn global add expo-cli && yarn && expo build:ios                    
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
