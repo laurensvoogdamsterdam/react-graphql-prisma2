@@ -1,9 +1,15 @@
 import { sign, verify } from "jsonwebtoken";
-
+/**
+ *  Token interface
+ */
 interface Token {
   userId: string;
 }
 
+/**
+ * Generate unique token.
+ * @returns token:string
+ */
 export const generateToken = async () => {
   return await sign(
     { generatedToken: `${new Date()}` },
@@ -11,6 +17,11 @@ export const generateToken = async () => {
   );
 };
 
+/**
+ * Auth middleware, checks for user making use of JWT
+ * @param request 
+ * @returns Exception if not auth, else continue
+ */
 export function isAuthenticated(request: any) {
   const authHeader = request.get("Authorization");
   if (authHeader) {

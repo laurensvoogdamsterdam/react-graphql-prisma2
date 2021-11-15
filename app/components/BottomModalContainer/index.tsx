@@ -4,7 +4,10 @@ import { CreatePost } from "../Post";
 import { CreateTask, TaskView } from "../Task";
 import styles from "./bottomModalContainerStyle";
 import { AuthContext } from "../../contexts";
-
+/**
+ * 
+ * @returns BottomModal
+ */
 export function BottomModalContainer() {
   const { state, dispatch } = useContext(AuthContext);
   const { bottomModal } = state;

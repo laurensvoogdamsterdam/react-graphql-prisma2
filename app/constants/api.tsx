@@ -1,4 +1,4 @@
-// Api url
+/**Constnat regarding backend api. */
 export const URL = "http://192.168.178.37:4000/";
 // exp://192.168.178.37:19000
 export const ACCESS_TOKEN_LOCATION = "nrlzp4z5bimrtygnamhp7";

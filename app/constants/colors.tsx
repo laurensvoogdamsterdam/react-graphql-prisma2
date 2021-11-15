@@ -1,6 +1,8 @@
 const tintColorLight = "#2f95dc";
 const tintColorDark = "#fff";
-
+/**
+ * Constants for theme and styling
+ */
 export const appTheme = {
   light: {
     text: "#000",

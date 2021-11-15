@@ -12,3 +12,14 @@ The following folders contain
     - GraphQL yoga provider for auth and data providers
 - web (React) - Not started
     - TODO
+
+## Auth JWT
+
+Uses JWT for authentication.
+### Testing
+
+We are using jest for running
+
+- Unit tests
+- Integration tests
+- Smoke tests

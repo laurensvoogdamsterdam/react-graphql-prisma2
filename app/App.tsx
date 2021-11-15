@@ -15,7 +15,6 @@ import { setContext } from "@apollo/client/link/context";
 import { URL } from "./constants/api";
 import { getAccessToken } from "./utils/accessToken";
 import { ActionType, AppContext, appReducers } from "./contexts";
-import { SafeAreaView } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { MenuProvider } from "react-native-popup-menu";
 import { BottomModalContainer } from "./components";
@@ -32,6 +31,9 @@ const httpLink = createUploadLink({
   uri: `${URL}`,
 });
 
+/**
+ * auth link (location to check for auth)
+ */
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   try {
@@ -54,17 +56,19 @@ const authLink = setContext((_, { headers }) => {
   return headers;
 });
 
+
+/**
+ *  Apollo client to access backend API
+ */
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 const ApolloApp = () => {
-  const isLoadingComplete = useCachedResources();
   const [state, dispatch] = useReducer(appReducers, initialState);
   const [loadingToken, setLoadingToken] = React.useState(true);
 
-  const colorScheme = useColorScheme();
 
   React.useEffect(() => {
     const tokenCheck = async () => {
@@ -74,7 +78,7 @@ const ApolloApp = () => {
             dispatch({ type: ActionType.SET_TOKEN, token: token });
           }
         })
-        .catch((e) => null);
+        .catch(() => null);
     };
     tokenCheck();
     setLoadingToken(false);
@@ -94,6 +98,10 @@ const ApolloApp = () => {
   }
 };
 
+/**
+ * Main app
+ * @returns App
+ */
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -116,10 +124,5 @@ const App = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  areaContainer: {
-    flex: 1,
-  },
-});
 
 export default App;

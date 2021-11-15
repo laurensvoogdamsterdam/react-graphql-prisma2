@@ -5,7 +5,7 @@ import schema from "./schema";
 import { createContext } from "./context";
 
 /**
- * 
+ * Use graphql server with schema and context defeinitions
  */
 const server = new GraphQLServer({
   schema,
@@ -32,6 +32,7 @@ const express = require("express");
 // server here is a GraphQL Yoga server
 server.express.use("/images", express.static("images/")); // ✔️
 
+/**Start listening  */
 server.start({ port: PORT }, () =>
   console.log(`✅ Server running on http://localhost:${PORT}`)
 );
