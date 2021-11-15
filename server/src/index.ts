@@ -4,6 +4,9 @@ import logger from "morgan";
 import schema from "./schema";
 import { createContext } from "./context";
 
+/**
+ * 
+ */
 const server = new GraphQLServer({
   schema,
   context: createContext,

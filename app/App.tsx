@@ -25,6 +25,7 @@ import reducer from "./store/reducer";
 import { AuthContext } from "./contexts";
 import { createUploadLink } from "apollo-upload-client";
 
+
 const httpLink = createUploadLink({
   uri: `${URL}`,
 });
