@@ -42,9 +42,23 @@ jobs:
       - run: |
           cd app
           yarn jest --testRunner
+  Build_and_deploy_backend:
+    if: ${{ always() }}
+    needs: [Test_app,Test_web,Test_server]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |        
+          cd web && yarn && yarn build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LAURENSVOOGD_DEV }}'
+          channelId: live
+          projectId: laurensvoogd-dev
   Build_and_deploy_web_app:
     if: ${{ always() }}
-    needs: [Test_web]
+    needs: [Test_web,Build_and_deploy_backend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -58,7 +72,7 @@ jobs:
           projectId: laurensvoogd-dev
   Build_and_release_for_android:
     if: ${{ always() }}
-    needs: [Test_app]
+    needs: [Test_app,Build_and_deploy_backend]
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -78,7 +92,7 @@ jobs:
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
   Build_and_releas_for_IOS:
     if: ${{ always() }}
-    needs: [Test_app]
+    needs: [Test_app,Build_and_deploy_backend]
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
